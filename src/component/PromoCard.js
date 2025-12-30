@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
 const PromoCard = ({ title, description, category }) => {
@@ -14,38 +14,53 @@ const PromoCard = ({ title, description, category }) => {
       start={{ x: 1, y: 1 }}
       end={{ x: 0, y: 1 }}
       colors={colors[category]}
-      style={{
-        width: 165,
-        height: "auto",
-        padding: 15,
-        borderRadius: 10,
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
+      style={styles.container}
     >
       <View style={{ marginBottom: 10 }}>
         <Text
-          style={{
-            fontSize: 20,
-            fontWeight: "bold",
-            color: "white",
-            textAlign: "center",
-          }}
+          style={styles.titleText}
         >
           {title}
         </Text>
-        <Text style={{ fontSize: 14, textAlign: "center", color: "white" }}>
+        <Text style={styles.descriptionText}>
           {description}
         </Text>
       </View>
 
       <TouchableOpacity
-        style={{ backgroundColor: "white", padding: 10, borderRadius: 5 }}
+        style={styles.button}
       >
         <Text style={{ fontWeight: "500" }}>Pakai Sekarang</Text>
       </TouchableOpacity>
     </LinearGradient>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: 165,
+    height: "auto",
+    padding: 15,
+    borderRadius: 10,
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  titleText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+    textAlign: "center",
+  },
+  descriptionText: {
+    fontSize: 14,
+    textAlign: "center",
+    color: "white",
+  },
+  button: {
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 5,
+  },
+});
 
 export default PromoCard;

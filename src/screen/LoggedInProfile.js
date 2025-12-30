@@ -17,9 +17,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { AuthContext } from "../authentication/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
-const LoggedInProfile = () => {
+const LoggedInProfile = ({navigation}) => {
   const { logout, userInfo } = useContext(AuthContext);
   const services = [
     { id: 1, title: "Pengaturan", icon: faGear },
@@ -27,53 +27,36 @@ const LoggedInProfile = () => {
     { id: 3, title: "Syarat dan Ketentuan", icon: faFileText },
     { id: 4, title: "Kebijakan Privasi", icon: faShield },
   ];
+
+  const toLoginPage = async () => {
+    await logout();
+    navigation.navigate("LoginScreen");
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <StatusBar hidden={true} />
       <View
-        style={{
-          backgroundColor: "#5ecc5bff",
-          paddingVertical: 50,
-          paddingHorizontal: 20,
-        }}
+        style={styles.headerContainer}
       >
-        <Text style={{ fontWeight: "bold", fontSize: 20, color: "white" }}>
+        <Text style={styles.profileTitle}>
           Profil Saya
         </Text>
-        <Text style={{ fontSize: 16, fontWeight: "300", color: "white" }}>
+        <Text style={styles.profileSubtitle}>
           Kelola informasi akun Anda
         </Text>
       </View>
       <View
-        style={{
-          flexDirection: "row",
-          marginHorizontal: 15,
-          marginTop: -30,
-          padding: 20,
-          backgroundColor: "white",
-          borderRadius: 10,
-          elevation: 5,
-        }}
+        style={styles.profileCard}
       >
         <View
-          style={{
-            width: 80,
-            height: 80,
-            borderRadius: 50,
-            backgroundColor: "#22c55e",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          style={styles.avatarContainer}
         >
           <FontAwesomeIcon icon={faUser} size={30} color="white" />
         </View>
 
         <View
-          style={{
-            marginHorizontal: 10,
-            paddingVertical: 5,
-            justifyContent: "space-between",
-          }}
+          style={styles.userInfoContainer}
         >
           <Text style={{ fontSize: 16, fontWeight: "bold" }}>
             {userInfo.name}
@@ -83,49 +66,30 @@ const LoggedInProfile = () => {
         </View>
       </View>
       <View
-        style={{
-          flexDirection: "row",
-          margin: 15,
-          padding: 20,
-          backgroundColor: "white",
-          elevation: 5,
-          borderRadius: 10,
-        }}
+        style={styles.statsCard}
       >
         <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            borderEndWidth: 1,
-            borderEndColor: "#c7c2c2ff",
-          }}
+          style={styles.statsItem}
         >
-          <Text style={{ fontSize: 16, fontWeight: "bold", color: "green" }}>
+          <Text style={styles.statsValueText}>
             12
           </Text>
           <Text>Pesanan</Text>
         </View>
 
         <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          style={styles.statsItemCenter}
         >
-          <Text style={{ fontSize: 16, fontWeight: "bold", color: "green" }}>
+          <Text style={styles.statsValueText}>
             5
           </Text>
           <Text>Ulasan</Text>
         </View>
 
         <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            borderStartWidth: 1,
-            borderStartColor: "#c7c2c2ff",
-          }}
+          style={styles.statsItemBorderStart}
         >
-          <Text style={{ fontSize: 16, fontWeight: "bold", color: "green" }}>
+          <Text style={styles.statsValueText}>
             350
           </Text>
           <Text>Poin</Text>
@@ -140,10 +104,7 @@ const LoggedInProfile = () => {
             <TouchableOpacity>
               <View style={styles.servicesContainer}>
                 <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
+                  style={styles.serviceRowStyle}
                 >
                   <FontAwesomeIcon
                     icon={item.icon}
@@ -162,19 +123,15 @@ const LoggedInProfile = () => {
           )}
         />
       </View>
-      <TouchableOpacity onPress={logout}>
+      <TouchableOpacity onPress={toLoginPage}>
         <View
           style={[
             styles.servicesContainer,
-            {
-              justifyContent: "center",
-              marginVertical: 15,
-              borderRadius: 10,
-            },
+            styles.logoutButtonStyle,
           ]}
         >
           <LogOut size={18} color={"#cc1010ff"} style={{ marginRight: 5 }} />
-          <Text style={{ fontSize: 16, fontWeight: "500", color: "#cc1010ff" }}>
+          <Text style={styles.logoutText}>
             Keluar
           </Text>
         </View>
@@ -244,6 +201,89 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+  headerContainer: {
+    backgroundColor: "#5ecc5bff",
+    paddingVertical: 50,
+    paddingHorizontal: 20,
+  },
+  profileTitle: {
+    fontWeight: "bold",
+    fontSize: 20,
+    color: "white",
+  },
+  profileSubtitle: {
+    fontSize: 16,
+    fontWeight: "300",
+    color: "white",
+  },
+  profileCard: {
+    flexDirection: "row",
+    marginHorizontal: 15,
+    marginTop: -30,
+    padding: 20,
+    backgroundColor: "white",
+    borderRadius: 10,
+    elevation: 5,
+  },
+  avatarContainer: {
+    width: 80,
+    height: 80,
+    borderRadius: 50,
+    backgroundColor: "#22c55e",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  userInfoContainer: {
+    marginHorizontal: 10,
+    paddingVertical: 5,
+    justifyContent: "space-between",
+  },
+  statsCard: {
+    flexDirection: "row",
+    margin: 15,
+    padding: 20,
+    backgroundColor: "white",
+    elevation: 5,
+    borderRadius: 10,
+  },
+  statsItem: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    borderEndWidth: 1,
+    borderEndColor: "#c7c2c2ff",
+  },
+  statsItemCenter: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  statsItemBorderStart: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    borderStartWidth: 1,
+    borderStartColor: "#c7c2c2ff",
+  },
+  statsValueText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "green",
+  },
+  serviceRowStyle: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  logoutButtonStyle: {
+    justifyContent: "center",
+    marginVertical: 15,
+    borderRadius: 10,
+  },
+  logoutText: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#cc1010ff",
   },
 });
 

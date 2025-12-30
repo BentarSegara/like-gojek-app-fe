@@ -1,22 +1,15 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
 const ServiceButton = ({ title, icon, backgroundColor }) => {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      style={{ marginVertical: 15, marginHorizontal: 25 }}
+      style={styles.touchable}
     >
       <View
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: 15,
-          padding: 15,
-          backgroundColor: backgroundColor,
-          elevation: 5,
-        }}
+        style={[styles.iconContainer, { backgroundColor: backgroundColor }]}
       >
         <FontAwesomeIcon icon={icon} size={30} color="white" />
       </View>
@@ -26,5 +19,19 @@ const ServiceButton = ({ title, icon, backgroundColor }) => {
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  touchable: {
+    marginVertical: 15,
+    marginHorizontal: 25,
+  },
+  iconContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 15,
+    padding: 15,
+    elevation: 5,
+  },
+});
 
 export default ServiceButton;

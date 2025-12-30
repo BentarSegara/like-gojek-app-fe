@@ -10,7 +10,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
 import {
   ScrollView,
@@ -19,9 +19,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import PromoCard from "../components/PromoCard";
-import ServiceButton from "../components/ServiceButton";
-import { AuthContext } from "../authentication/AuthContext";
+import PromoCard from "../component/PromoCard";
+import ServiceButton from "../component/ServiceButton";
+import { AuthContext } from "../context/AuthContext";
 
 const Home = () => {
   const { userInfo } = useContext(AuthContext);
@@ -60,10 +60,10 @@ const Home = () => {
       <View style={styles.header}>
         <View style={styles.welcomeContainer}>
           <View>
-            <Text style={{ fontSize: 16, fontWeight: "300", color: "white" }}>
+            <Text style={styles.welcomeText1}>
               Selamat Datang,
             </Text>
-            <Text style={{ fontSize: 20, fontWeight: "bold", color: "white" }}>
+            <Text style={styles.welcomeText2}>
               {userInfo.name ?? "Pengguna Ujek"}
             </Text>
           </View>
@@ -77,10 +77,7 @@ const Home = () => {
 
         <View style={styles.balanceContainer}>
           <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-            }}
+            style={styles.balanceRow}
           >
             <View style={styles.walletContainer}>
               <FontAwesomeIcon icon={faWallet} color="white" size={25} />
@@ -95,7 +92,7 @@ const Home = () => {
 
           <TouchableOpacity>
             <View style={styles.topUpContainer}>
-              <Text style={{ fontSize: 16, fontWeight: "500", color: "white" }}>
+              <Text style={styles.topUpText}>
                 Top Up
               </Text>
             </View>
@@ -118,12 +115,9 @@ const Home = () => {
           ))}
         </View>
       </View>
-      <View style={{ margin: 15, padding: 10 }}>
+      <View style={styles.marginContainer}>
         <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
+          style={styles.promoHeaderRow}
         >
           <View>
             <Text style={{ fontSize: 18, fontWeight: "bold" }}>
@@ -132,10 +126,7 @@ const Home = () => {
           </View>
 
           <TouchableOpacity
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-            }}
+            style={styles.seeAllRow}
           >
             <Text style={styles.seeAllText}>Lihat Semua</Text>
             <FontAwesomeIcon
@@ -237,6 +228,37 @@ const styles = StyleSheet.create({
     marginTop: 10,
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  welcomeText1: {
+    fontSize: 16,
+    fontWeight: "300",
+    color: "white",
+  },
+  welcomeText2: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+  },
+  balanceRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  topUpText: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "white",
+  },
+  marginContainer: {
+    margin: 15,
+    padding: 10,
+  },
+  promoHeaderRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  seeAllRow: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 

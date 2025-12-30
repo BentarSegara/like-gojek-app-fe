@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
@@ -6,11 +6,11 @@ import {
   faUser,
   faCartShopping,
 } from "@fortawesome/free-solid-svg-icons";
-import OrderScreen from "../screens/OrderScreen";
-import ProfileScreen from "../screens/ProfileScreen";
-import Home from "../screens/HomeScreen";
-import LoggedInProfile from "../screens/LoggedInProfile";
-import { AuthContext } from "../authentication/AuthContext";
+import OrderScreen from "../screen/OrderScreen";
+import ProfileScreen from "../screen/ProfileScreen";
+import Home from "../screen/HomeScreen";
+import LoggedInProfile from "../screen/LoggedInProfile";
+import { AuthContext } from "../context/AuthContext";
 
 const Tab = createBottomTabNavigator();
 export default function BottomTabBar() {

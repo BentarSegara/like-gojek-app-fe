@@ -14,7 +14,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import React from "react";
 import {
-  FlatList,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -86,10 +85,7 @@ export function DeliveryInfo({ deliveryInfo }) {
       {detailsOrder.map((detail) => (
         <View
           key={detail.id}
-          style={{
-            flexDirection: "row",
-            marginVertical: 5,
-          }}
+          style={styles.detailRow}
         >
           <View style={{ margin: 2 }}>
             <FontAwesomeIcon icon={detail.icon} color={detail.color} />
@@ -108,7 +104,7 @@ export function OtherInfo({ otherInfo }) {
   const driver = otherInfo.driver;
   return (
     <>
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+      <View style={styles.otherInfoRow}>
         <View style={styles.dateTimeContainer}>
           <FontAwesomeIcon
             icon={faClock}
@@ -131,7 +127,7 @@ export function OtherInfo({ otherInfo }) {
           {otherInfo.driver !== "" ? (
             <>
               <Text style={{ fontWeight: "300" }}>{driver.name}</Text>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <View style={styles.ratingRow}>
                 {Array.from({ length: 5 }).map((_, index) => (
                   <FontAwesomeIcon
                     key={index}
@@ -155,7 +151,7 @@ export function OtherInfo({ otherInfo }) {
         </View>
         <View>
           <Text style={{ fontWeight: "300" }}>Total Pembayaran</Text>
-          <Text style={{ fontSize: 18, fontWeight: "500", color: "#52a152ff" }}>
+          <Text style={styles.totalPaymentText}>
             Rp. {otherInfo.totalPayment}
           </Text>
         </View>
@@ -298,21 +294,15 @@ const OrderList = ({ orders }) => {
           </View>
 
           <View
-            style={{
-              padding: 10,
-              backgroundColor: "#fafafaff",
-            }}
+            style={styles.otherInfoContainer}
           >
             <OtherInfo otherInfo={orderData.otherInfo} />
             <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
+              style={styles.otherInfoRow}
             >
               <TouchableOpacity style={styles.orderAgainButton}>
                 <View style={{ padding: 12 }}>
-                  <Text style={{ fontWeight: "500", color: "#5ecc5bff" }}>
+                  <Text style={styles.orderAgainText}>
                     Pesan Lagi
                   </Text>
                 </View>
@@ -320,7 +310,7 @@ const OrderList = ({ orders }) => {
 
               <TouchableOpacity style={styles.seeDetailButton}>
                 <View style={{ padding: 12 }}>
-                  <Text style={{ fontWeight: "500", color: "white" }}>
+                  <Text style={styles.seeDetailText}>
                     Lihat Detail
                   </Text>
                 </View>
@@ -347,7 +337,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 15,
     padding: 15,
-    // backgroundColor: "#5ecc5bff",
     elevation: 5,
   },
   basicInfoContainer: {
@@ -389,6 +378,35 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     borderRadius: 10,
     backgroundColor: "#5ecc5bff",
+  },
+  detailRow: {
+    flexDirection: "row",
+    marginVertical: 5,
+  },
+  otherInfoRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  ratingRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  totalPaymentText: {
+    fontSize: 18,
+    fontWeight: "500",
+    color: "#52a152ff",
+  },
+  otherInfoContainer: {
+    padding: 10,
+    backgroundColor: "#fafafaff",
+  },
+  orderAgainText: {
+    fontWeight: "500",
+    color: "#5ecc5bff",
+  },
+  seeDetailText: {
+    fontWeight: "500",
+    color: "white",
   },
 });
 export default OrderList;

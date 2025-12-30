@@ -1,5 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -10,7 +9,7 @@ import {
 } from "react-native";
 import { AuthContext } from "../authentication/AuthContext";
 
-const RegisterScreen = () => {
+const RegisterScreen = ({navigation}) => {
   const { register } = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -64,7 +63,6 @@ const RegisterScreen = () => {
     },
   ];
 
-  const navigation = useNavigation();
   return (
     <View
       style={{
@@ -110,12 +108,7 @@ const RegisterScreen = () => {
         </TouchableOpacity>
         <View>
           <Text
-            style={{
-              fontSize: 12,
-              fontWeight: "bold",
-              textAlign: "center",
-              color: "#e05050ff",
-            }}
+            style={styles.errorText}
           >
             {registerError}
           </Text>
@@ -145,6 +138,12 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "white",
     textAlign: "center",
+  },
+  errorText: {
+    fontSize: 12,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#e05050ff",
   },
 });
 

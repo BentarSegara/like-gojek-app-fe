@@ -1,7 +1,6 @@
 import { faCalendar } from "@fortawesome/free-regular-svg-icons";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   ScrollView,
@@ -10,10 +9,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import OrderList from "../components/OrderList";
+import OrderList from "../component/OrderList";
 
 const OrderScreen = () => {
-  const navigation = useNavigation();
   const [filters, setFilters] = useState([
     { id: 1, title: "Semua", active: true },
     { id: 2, title: "URide", active: false },
@@ -171,34 +169,16 @@ const OrderScreen = () => {
   return (
     <View style={{ flex: 1 }}>
       <View
-        style={{
-          flexDirection: "row",
-          paddingHorizontal: 15,
-          paddingVertical: 50,
-          backgroundColor: "#5ecc5bff",
-          alignItems: "center",
-          justifyContent: "space-between",
-          borderBottomLeftRadius: 25,
-          borderBottomRightRadius: 25,
-        }}
+        style={styles.header}
       >
         <View>
           <Text
-            style={{
-              fontSize: 20,
-              fontWeight: "bold",
-              color: "white",
-              marginBottom: 15,
-            }}
+            style={styles.headerTitle}
           >
             Riwayat Pesanan
           </Text>
           <Text
-            style={{
-              fontSize: 16,
-              fontWeight: "300",
-              color: "white",
-            }}
+            style={styles.headerSubtitle}
           >
             Total {orders.length} pesanan
           </Text>
@@ -206,30 +186,14 @@ const OrderScreen = () => {
 
         <TouchableOpacity>
           <View
-            style={{
-              width: 35,
-              height: 35,
-              borderRadius: 10,
-              backgroundColor: "rgba(214, 211, 211, 0.5)",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
+            style={styles.calendarButton}
           >
             <FontAwesomeIcon icon={faCalendar} size={25} color="white" />
           </View>
         </TouchableOpacity>
       </View>
       <View
-        style={{
-          marginTop: -25,
-          marginBottom: 10,
-          marginHorizontal: 10,
-          padding: 10,
-          backgroundColor: "white",
-          borderTopLeftRadius: 15,
-          borderTopRightRadius: 15,
-          elevation: 5,
-        }}
+        style={styles.filterWrapper}
       >
         <ScrollView horizontal={true}>
           <View style={{ alignSelf: "center", margin: 5 }}>
@@ -276,6 +240,45 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
+  },
+  header: {
+    flexDirection: "row",
+    paddingHorizontal: 15,
+    paddingVertical: 50,
+    backgroundColor: "#5ecc5bff",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+    marginBottom: 15,
+  },
+  headerSubtitle: {
+    fontSize: 16,
+    fontWeight: "300",
+    color: "white",
+  },
+  calendarButton: {
+    width: 35,
+    height: 35,
+    borderRadius: 10,
+    backgroundColor: "rgba(214, 211, 211, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  filterWrapper: {
+    marginTop: -25,
+    marginBottom: 10,
+    marginHorizontal: 10,
+    padding: 10,
+    backgroundColor: "white",
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    elevation: 5,
   },
 });
 

@@ -9,7 +9,6 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
   FlatList,
@@ -20,8 +19,7 @@ import {
   View,
 } from "react-native";
 
-const ProfileScreen = () => {
-  const navigation = useNavigation();
+const ProfileScreen = ({navigation}) => {
   const services = [
     { id: 1, title: "Pengaturan", icon: faGear },
     { id: 2, title: "Bantuan", icon: faCircleQuestion },
@@ -43,12 +41,12 @@ const ProfileScreen = () => {
 
           <View style={{ margin: 7 }}>
             <Text
-              style={{ fontSize: 18, fontWeight: "500", textAlign: "center" }}
+              style={styles.notLoggedInText}
             >
               Belum Login
             </Text>
             <Text
-              style={{ fontSize: 14, fontWeight: "300", textAlign: "center" }}
+              style={styles.subText}
             >
               Silakan login atau daftar untuk mengakses fitur lengkap
             </Text>
@@ -61,7 +59,7 @@ const ProfileScreen = () => {
               <View style={styles.loginText}>
                 <FontAwesomeIcon icon={faArrowRightToBracket} color="white" />
                 <Text
-                  style={{ fontSize: 16, color: "white", fontWeight: "500" }}
+                  style={styles.loginButtonText}
                 >
                   Login
                 </Text>
@@ -69,9 +67,7 @@ const ProfileScreen = () => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => navigation.navigate("RegisterScreen")}
-          >
+          <TouchableOpacity onPress={() => navigation.navigate("RegisterScreen")}>
             <View style={styles.signupButton}>
               <View style={styles.signUpContainer}>
                 <FontAwesomeIcon icon={faUserPlus} color="#07ad52ff" />
@@ -90,10 +86,7 @@ const ProfileScreen = () => {
             <TouchableOpacity>
               <View style={styles.servicesContainer}>
                 <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
+                  style={styles.serviceRowStyle}
                 >
                   <FontAwesomeIcon
                     icon={item.icon}
@@ -176,6 +169,25 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
+  },
+  notLoggedInText: {
+    fontSize: 18,
+    fontWeight: "500",
+    textAlign: "center",
+  },
+  subText: {
+    fontSize: 14,
+    fontWeight: "300",
+    textAlign: "center",
+  },
+  loginButtonText: {
+    fontSize: 16,
+    color: "white",
+    fontWeight: "500",
+  },
+  serviceRowStyle: {
+    flexDirection: "row",
     alignItems: "center",
   },
 });

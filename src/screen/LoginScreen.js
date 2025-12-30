@@ -1,5 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,10 +6,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { AuthContext } from "../authentication/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
-const LoginScreen = () => {
-  const navigation = useNavigation();
+const LoginScreen = ({navigation}) => {
   const { login } = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState({
     email: "",
@@ -88,25 +86,20 @@ const LoginScreen = () => {
 
         <View>
           <Text
-            style={{
-              fontSize: 12,
-              fontWeight: "bold",
-              textAlign: "center",
-              color: "#e05050ff",
-            }}
+            style={styles.errorText}
           >
             {loginError}
           </Text>
         </View>
       </View>
 
-      <View style={{ flexDirection: "row", justifyContent: "center" }}>
+      <View style={styles.footerRow}>
         <Text style={{ fontSize: 16, fontWeight: "bold" }}>
           Belum punyak akun ?{" "}
         </Text>
         <TouchableOpacity onPress={() => navigation.navigate("RegisterScreen")}>
           <Text
-            style={{ fontSize: 16, fontWeight: "bold", color: "#07ad52ff" }}
+            style={styles.registerNowText}
           >
             Daftar Sekarang
           </Text>
@@ -136,6 +129,21 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "white",
     textAlign: "center",
+  },
+  errorText: {
+    fontSize: 12,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#e05050ff",
+  },
+  footerRow: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  registerNowText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#07ad52ff",
   },
 });
 
