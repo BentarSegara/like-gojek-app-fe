@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { AuthContext } from "../authentication/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
-const RegisterScreen = ({navigation}) => {
+const RegisterScreen = ({ navigation }) => {
   const { register } = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState({
     name: "",
@@ -107,11 +107,7 @@ const RegisterScreen = ({navigation}) => {
           </View>
         </TouchableOpacity>
         <View>
-          <Text
-            style={styles.errorText}
-          >
-            {registerError}
-          </Text>
+          <Text style={styles.errorText}>{registerError}</Text>
         </View>
       </View>
     </View>
